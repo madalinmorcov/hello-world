@@ -1,6 +1,5 @@
 #include "ILog.h"
 #include <iostream>
-#include <sstream>
 
 void Logging::Log(ErrorType ID,const std::string& message)
 {

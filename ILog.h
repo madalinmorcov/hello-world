@@ -23,8 +23,6 @@ public:
 private:
 	std::ofstream logOutput;
 	time_t m_timer;
-	
-
 };
 
 m_timer = time(0);

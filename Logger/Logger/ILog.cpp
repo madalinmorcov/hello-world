@@ -40,13 +40,17 @@ void Logging::Log(ErrorType ID,const std::string& message)
 	case ErrorType::FATAL:
 		type = "FATAL";
 		break;
-
 	}
+
+	/*for (int i = 0; true;i++)
+	{
+		char *x;
+		x = new char[i];
+	}*/
 
 	logOutput <<" ["<<type<<"] "<< message;
 
 	std::cout << std::endl << " " << logOutput.str() << std::endl;
-
 }
 
 void Timer::start()
@@ -74,7 +78,6 @@ void TimerWrapper::startTimer(const std::string& timerName)
 	}
 	else
 		std::cout << "Vezi ca e deja adaugat timeru asta. Sal" << std::endl;
-	
 }
 
 std::string TimerWrapper::stopTimer(const std::string& timerName)

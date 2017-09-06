@@ -51,16 +51,12 @@ public:
 	RealSubject* operator -> (){
 		std::string timerName = "timer1";
 		_rapper.startTimer(timerName);
-		_rapper.startTimer("otherTimer");
 
 		std::string strWork = _trueOne;
 		size_t start = strWork.find_first_of(' ');
 		start = strWork.find_first_of(' ', start + 1);
 		start = strWork.find_first_of(' ', start + 1);
 		size_t end = strWork.size();
-
-		_manage.Log(ErrorType::INFO, _rapper.stopTimer("otherTimer") + " : RealSubject => execute()  -  OK");
-
 		strWork = strWork.erase(start, end);                         ////       not sexy
 		start = strWork.find_first_of(' ');
 		end = strWork.find_first_of(' ', start + 1);

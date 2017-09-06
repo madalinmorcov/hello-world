@@ -20,5 +20,5 @@ inline void Logging::Log(const std::string& message)
 	else
 		logOutput << now->tm_sec;
 
-	logOutput << message;
+	logOutput << &message;
 }

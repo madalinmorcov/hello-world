@@ -1,7 +1,8 @@
 #include "ILog.h"
 #include <iostream>
+#include <sstream>
 
-inline void Logging::Log(const std::string& message)
+void Logging::Log(ErrorType ID,const std::string& message)
 {
 
 	m_timer = time(0);
@@ -20,5 +21,30 @@ inline void Logging::Log(const std::string& message)
 	else
 		logOutput << now->tm_sec;
 
-	logOutput << message;
+	std::string type;
+
+	switch (ID)
+	{
+	case ErrorType::ERROR:
+		type = "ERROR";
+		break;
+	case ErrorType::WARNING:
+		type = "WARNING";
+		break;
+	case ErrorType::INFO:
+		type = "INFO";
+		break;
+	case ErrorType::DEBUG:
+		type = "DEBUG";
+		break;
+	case ErrorType::FATAL:
+		type = "FATAL";
+		break;
+
+	}
+
+	logOutput <<"["<<type<<"]"<< message;
+
+	std::cout << " " << logOutput.str() << std::endl;
+
 }

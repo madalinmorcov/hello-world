@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <ctime>
+#include <sstream>
 
 enum class ErrorType
 {
@@ -16,15 +17,16 @@ enum class ErrorType
 class ILog
 {
 public:
-	ILog();
-	virtual void Log(const std::string& message) = 0;
-	~ILog();
+	ILog() = default;
+	//virtual void Log(const std::string& message) = 0;
+	~ILog() = default;
 };
 
 class Logging : public ILog
 {
-	void Log(const std::string& message) override;
+public:
+	void Log(ErrorType ID,const std::string& message);
 private:
-	std::ofstream logOutput;
+	std::stringstream logOutput;
 	time_t m_timer;
 };

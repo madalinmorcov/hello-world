@@ -42,7 +42,7 @@ void Logging::Log(ErrorType ID,const std::string& message)
 
 	}
 
-	logOutput <<"["<<type<<"]"<< message;
+	logOutput <<" ["<<type<<"] "<< message;
 
 	std::cout << " " << logOutput.str() << std::endl;
 

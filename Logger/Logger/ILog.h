@@ -18,7 +18,7 @@ class ILog
 {
 public:
 	ILog() = default;
-	//virtual void Log(const std::string& message) = 0;
+	virtual void Log(ErrorType ID,const std::string& message) = 0;
 	~ILog() = default;
 };
 

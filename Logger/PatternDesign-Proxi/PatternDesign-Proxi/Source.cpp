@@ -1,10 +1,14 @@
 #include <iostream>
 #include <string>
+#include "../../Logger/ILog.h"
+#include "../../Logger/ILog.cpp"
 
 class Printer
 {
 public:
 	virtual void execute() = 0;
+	Logging _manage;
+	TimerWrapper _rapper;
 };
 
 class RealSubject : public Printer
@@ -14,6 +18,7 @@ public:
 	void execute() override
 	{
 		std::cout << str;
+		_manage.Log(ErrorType::INFO, "RealSubject => execute()  -  OK");
 	}
 	~RealSubject() = default;
 private:
@@ -44,11 +49,18 @@ public:
 
 	}
 	RealSubject* operator -> (){
+		std::string timerName = "timer1";
+		_rapper.startTimer(timerName);
+		_rapper.startTimer("otherTimer");
+
 		std::string strWork = _trueOne;
 		size_t start = strWork.find_first_of(' ');
 		start = strWork.find_first_of(' ', start + 1);
 		start = strWork.find_first_of(' ', start + 1);
 		size_t end = strWork.size();
+
+		_manage.Log(ErrorType::INFO, _rapper.stopTimer("otherTimer") + " : RealSubject => execute()  -  OK");
+
 		strWork = strWork.erase(start, end);                         ////       not sexy
 		start = strWork.find_first_of(' ');
 		end = strWork.find_first_of(' ', start + 1);
@@ -56,6 +68,11 @@ public:
 		strWork = strWork.erase(start, end-3);
 
 		std::cout << strWork << " ";
+
+		
+		_manage.Log(ErrorType::INFO, _rapper.stopTimer(timerName)+ " : RealSubject => execute()  -  OK");
+
+
 		return real;
 	}
 	~ProxySubject()

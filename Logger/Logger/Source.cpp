@@ -6,5 +6,14 @@ void main()
 {
 	Logging LoggIt;
 
-	LoggIt.Log(ErrorType::ERROR, "again man");
+	Timer x;
+
+	x.start();
+
+
+
+	x.stop();
+
+	LoggIt.Log(ErrorType::ERROR, "ya man " + std::to_string(x.getTime()));
+
 }

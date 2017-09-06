@@ -1,5 +1,6 @@
 #include "ILog.h"
 #include <iostream>
+#include <chrono>
 
 void Logging::Log(ErrorType ID,const std::string& message)
 {
@@ -44,6 +45,42 @@ void Logging::Log(ErrorType ID,const std::string& message)
 
 	logOutput <<" ["<<type<<"] "<< message;
 
-	std::cout << " " << logOutput.str() << std::endl;
+	std::cout << std::endl << " " << logOutput.str() << std::endl;
 
+}
+
+void Timer::start()
+{
+	_start = std::chrono::system_clock::now();
+}
+
+double Timer::getTime()
+{
+	return _diff.count();
+}
+
+void Timer::stop()
+{
+	_end = std::chrono::system_clock::now();
+	_diff = _end - _start;
+}
+
+void TimerWrapper::startTimer(const std::string& timerName)
+{
+	if (_timers.find(timerName) == _timers.end())
+	{
+		_timers.emplace(timerName, new Timer);
+		_timers[timerName]->start();
+	}
+	else
+		std::cout << "Vezi ca e deja adaugat timeru asta. Sal" << std::endl;
+	
+}
+
+std::string TimerWrapper::stopTimer(const std::string& timerName)
+{
+	_timers[timerName]->stop();
+	auto time = std::to_string(_timers[timerName]->getTime());
+	_timers.erase(timerName);
+	return time;
 }
